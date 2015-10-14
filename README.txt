@@ -3,6 +3,38 @@ __________
 
 Here is my submission for the SYPartners coding exercise. 
 
+Example run
+-----------
+$ ruby load_inventory.rb cd_sellers.csv
+$ ruby search_inventory.rb artist Nas
+Artist: Nas
+Album: Illmatic
+Released: 1994
+CD(2): <uid>
+Vinyl(1): <uid>
+$ ruby load_inventory.rb music_merchant.csv
+$ ruby search_inventory.rb album matic
+Artist: Nas
+Album: Illmatic
+Released: 1994
+Tape(2): <uid>
+Vinyl(1): <uid>
+
+Artist: Nas
+Album: Stillmatic
+Released: 2001
+CD(2): <uid>
+Vinyl(1): <uid for Stillmatic vinyl>
+$ ruby purchase.rb <uid for Stillmatic vinyl>
+Removed 1 vinyl of Stillmatic by Nas from the inventory
+$ ruby search_inventory.rb album stillmatic
+Artist: Nas
+Album: Stillmatic
+Released: 2001
+CD(2): <uid>
+$
+
+
 Design Overview
 ___________
 
@@ -55,28 +87,6 @@ $ ruby purchase pink\ floyd\|the\ dark\ side\ of\ the\ moon\|1973\|cd
 
 All inputs/outputs are handled as lowercase to prevent case issues, hashing to different things
 
-You can search for all cds, vinyls, or tapes in stock, and the search will return all items in stock in decending order
+You can search for all cds, vinyls, or tapes in stock, and the search will return all items in stock in descending order
 
 When an item is out of stock in all formats I figured it was better to have the artist-title-year persist in the inventory, so you know whats missing. 
-
-Shortcomings / TODOs
-________
-
-If I had more time to work on this further I would work on the following
-
--Handling incorrect file input formats, 
-currently it works on good faith that the prompt will give correctly formatted files
-
--Handling "strange" inputs - ie. bands or albums that contain funky characters particularly pipes,
-because they are used in ID slugs for various maps. Beyond the command line escaping, it could potentially 
-mess up JSON parsing if fields contain colons or curly brackets.
-
--Abstracting out procs or blocks in load_inventory - The code is repetitive when creating new music entries
-
--Find a better regular expression to parse out when the first item in a CSV is in quotes. 
-
-____
-
-Hope to hear from you guys soon!
-
-Edem :D
